@@ -84,17 +84,25 @@
       background: #ccc;
       height: 160px;
       border-radius: 12px;
-      background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.4) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.4) 75%, rgba(255, 255, 255, 0.4)),
-        linear-gradient(45deg, rgba(255, 255, 255, 0.4) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.4) 75%, rgba(255, 255, 255, 0.4));
-      background-size: 20px 20px;
-      background-position: 0 0, 10px 10px;
-      background-color: rgba(255, 255, 255, 0.5);
+      background-size: cover;
+      background-position: center;
       display: flex;
       align-items: flex-end;
       padding: 10px;
       box-sizing: border-box;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Default checkboard style used when no specific background image is loaded */
+    .post.no-bg {
+      background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.4) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.4) 75%, rgba(255, 255, 255, 0.4)),
+        linear-gradient(45deg, rgba(255, 255, 255, 0.4) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.4) 75%, rgba(255, 255, 255, 0.4));
+      background-size: 20px 20px;
+      background-position: 0 0, 10px 10px;
+      background-color: rgba(255, 255, 255, 0.5);
     }
 
     .post span {
@@ -105,6 +113,19 @@
       font-size: 0.75rem;
       font-weight: 600;
       pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Overlays for content preview styling */
+    .post::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+      z-index: 1;
     }
 
     /* Fake Internal Page (Paywall) */
@@ -152,7 +173,7 @@
       margin: 20px;
       height: 300px;
       border-radius: 12px;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="%23FF69B4" opacity="0.2"><circle cx="50" cy="50" r="40"/></svg>') center/cover, #fff;
+      background: center/cover no-repeat, #fff;
       filter: blur(8px);
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
@@ -408,25 +429,36 @@
   <header>Eshay Feet Pics</header>
 
   <div class="categories" id="categoryTabs">
-    <div class="category active">Soles</div>
-    <div class="category">High Heels</div>
-    <div class="category">Toes</div>
-    <div class="category">Socks</div>
-    <div class="category">Pedicure</div>
-    <div class="category">Dirty</div>
-    <div class="category">Tattoos</div>
-    <div class="category">Boots</div>
+    <div class="category active" onclick="loadCategory('High Heels')">High Heels</div>
+    <div class="category" onclick="loadCategory('Webbed')">Webbed</div>
+    <div class="category" onclick="loadCategory('Stanky')">Stanky</div>
+    <div class="category" onclick="loadCategory('Toes')">Toes</div>
+    <div class="category" onclick="loadCategory('Socks')">Socks</div>
+    <div class="category" onclick="loadCategory('Pedicure')">Pedicure</div>
+    <div class="category" onclick="loadCategory('Dirty')">Dirty</div>
+    <div class="category" onclick="loadCategory('Tattoos')">Tattoos</div>
+    <div class="category" onclick="loadCategory('Boots')">Boots</div>
   </div>
 
   <div class="feed" id="mainFeed">
-    <div class="post"><span>New Arrivals</span></div>
-    <div class="post"><span>Trending 🔥</span></div>
-    <div class="post"><span>Premium VIP</span></div>
-    <div class="post"><span>Summer Collection</span></div>
-    <div class="post"><span>Unlock 🔓</span></div>
-    <div class="post"><span>Just Joined</span></div>
-    <div class="post"><span>Sandals</span></div>
-    <div class="post"><span>Top 1%</span></div>
+    <!-- Initial Load (High Heels View) -->
+    <div class="post" style="background-image: url('high_heels.png');"
+      onclick="openPost('New Arrivals High Heels', 'high_heels.png')"><span>New Arrivals High Heels</span></div>
+    <div class="post" style="background-image: url('high_heels.png');"
+      onclick="openPost('Trending 🔥 High Heels', 'high_heels.png')"><span>Trending 🔥 High Heels</span></div>
+    <div class="post" style="background-image: url('high_heels.png');"
+      onclick="openPost('Premium VIP High Heels', 'high_heels.png')"><span>Premium VIP High Heels</span></div>
+    <div class="post" style="background-image: url('high_heels.png');"
+      onclick="openPost('Summer Collection High Heels', 'high_heels.png')"><span>Summer Collection High Heels</span>
+    </div>
+    <div class="post" style="background-image: url('high_heels.png');"
+      onclick="openPost('Unlock 🔓 High Heels', 'high_heels.png')"><span>Unlock 🔓 High Heels</span></div>
+    <div class="post" style="background-image: url('high_heels.png');"
+      onclick="openPost('Just Joined High Heels', 'high_heels.png')"><span>Just Joined High Heels</span></div>
+    <div class="post" style="background-image: url('high_heels.png');"
+      onclick="openPost('Sandals High Heels', 'high_heels.png')"><span>Sandals High Heels</span></div>
+    <div class="post" style="background-image: url('high_heels.png');"
+      onclick="openPost('Top 1% High Heels', 'high_heels.png')"><span>Top 1% High Heels</span></div>
   </div>
 
   <!-- Fake Sub-page for links -->
@@ -435,7 +467,7 @@
       <div class="back-btn" onclick="closePage()">←</div>
       <span id="pageTitle">Content</span>
     </div>
-    <div class="fake-content"></div>
+    <div class="fake-content" id="paywallPreview"></div>
     <div class="paywall-box">
       <h2>Premium Content Locked</h2>
       <p>Subscribe to view this full gallery and unlock all exclusive content.</p>
@@ -483,44 +515,85 @@
   </div>
 
   <script>
-    /* --- PAGE NAVIGATION LOGIC --- */
+    // Define the specific category content & image attachments
+    const imgWebbed = 'webbed.png';
+    const imgStanky = 'stanky.png';
+    const imgHighHeels = 'high_heels.png';
 
-    // Handle Category Clicks
-    const categories = document.querySelectorAll('.category');
-    const feedPosts = document.querySelectorAll('.post span');
+    // Sound effect trigger (Using standard telephony sound)
+    const ringSfx = new Audio('https://www.soundjay.com/phone/sounds/telephone-ring-4.mp3');
+    ringSfx.loop = true;
 
-    categories.forEach(cat => {
-      cat.addEventListener('click', () => {
-        // Remove active class from all, add to clicked
-        categories.forEach(c => c.classList.remove('active'));
-        cat.classList.add('active');
-
-        // Change the feed text to pretend it loaded new content
-        const categoryName = cat.innerText;
-        feedPosts.forEach((post, index) => {
-          const modifiers = ["Top", "New", "Premium", "Hot", "Fav", "Daily", "Weekly", "Exclusive"];
-          post.innerText = modifiers[index] + " " + categoryName;
-        });
-      });
-    });
-
-    // Handle Post/Image Clicks
+    // Track state of page-view
     const pageView = document.getElementById('pageView');
     const pageTitle = document.getElementById('pageTitle');
-    const posts = document.querySelectorAll('.post');
+    const paywallPreview = document.getElementById('paywallPreview');
 
-    posts.forEach(post => {
-      post.addEventListener('click', () => {
-        // Get the text of the clicked post and set it as the page title
-        pageTitle.innerText = post.querySelector('span').innerText;
-        pageView.style.display = 'flex';
-      });
-    });
+    function openPost(title, imageSrc) {
+      pageTitle.innerText = title;
+      if (imageSrc) {
+        paywallPreview.style.backgroundImage = `url('${imageSrc}')`;
+        paywallPreview.style.filter = 'blur(8px)';
+      } else {
+        // Fallback default background
+        paywallPreview.style.backgroundImage = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="%23FF69B4" opacity="0.2"><circle cx="50" cy="50" r="40"/></svg>')`;
+        paywallPreview.style.filter = 'blur(8px)';
+      }
+      pageView.style.display = 'flex';
+    }
 
     function closePage() {
       pageView.style.display = 'none';
     }
 
+    /* --- PAGE NAVIGATION LOGIC --- */
+    function loadCategory(categoryName) {
+      // Highlight active category tab
+      const categories = document.querySelectorAll('.category');
+      categories.forEach(cat => {
+        if (cat.innerText === categoryName) {
+          cat.classList.add('active');
+        } else {
+          cat.classList.remove('active');
+        }
+      });
+
+      // Populate targeted feed content
+      const feed = document.getElementById('mainFeed');
+      feed.innerHTML = ''; // Clear prior content
+
+      const modifiers = ["Top", "New", "Premium", "Hot", "Fav", "Daily", "Weekly", "Exclusive"];
+
+      modifiers.forEach((mod, index) => {
+        const title = `${mod} ${categoryName}`;
+        let bgStyle = '';
+        let imageToPass = '';
+        let classList = 'post';
+
+        // Bind appropriate photo assets
+        if (categoryName === 'Webbed') {
+          bgStyle = `background-image: url('${imgWebbed}');`;
+          imageToPass = imgWebbed;
+        } else if (categoryName === 'Stanky') {
+          bgStyle = `background-image: url('${imgStanky}');`;
+          imageToPass = imgStanky;
+        } else if (categoryName === 'High Heels') {
+          bgStyle = `background-image: url('${imgHighHeels}');`;
+          imageToPass = imgHighHeels;
+        } else {
+          classList += ' no-bg';
+        }
+
+        const postElement = document.createElement('div');
+        postElement.className = classList;
+        if (bgStyle) postElement.setAttribute('style', bgStyle);
+
+        // Connect event listener 
+        postElement.onclick = () => openPost(title, imageToPass);
+        postElement.innerHTML = `<span>${title}</span>`;
+        feed.appendChild(postElement);
+      });
+    }
 
     /* --- PHONE & DIALER LOGIC --- */
     let currentNumber = "";
@@ -569,8 +642,16 @@
         modal.style.display = 'none';
         ringingModal.style.display = 'flex';
 
-        // Wait 3.5 seconds, then show video
+        // Play the telephone ringing sound
+        ringSfx.play().catch(err => {
+          console.log("Audio failed to load, verify autoplay policies:", err);
+        });
+
+        // Wait 3.5 seconds, then show video and stop ringing
         setTimeout(() => {
+          ringSfx.pause();
+          ringSfx.currentTime = 0; // reset track
+
           ringingModal.style.display = 'none';
           videoModal.style.display = 'flex';
 
